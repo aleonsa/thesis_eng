@@ -1,0 +1,65 @@
+%% This is file `backrefx.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% backrefx.dtx  (with options: `package')
+%% Author: Danie Els (dnjels@sun.ac.za)
+%%
+%% Copyright 2004 by Danie Els. All rights reserved.
+%%
+%% This work may be distributed and/or modified under the conditions of
+%% the LaTeX Project Public License, either version 1.3 of this license
+%% or (at your option) any later version. The latest version of the
+%% license is in
+%%      http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2003/12/01 or later.
+%%
+%% This work has the LPPL maintenance status "author-maintained".
+%% -----------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}[1999/12/01]
+\ProvidesPackage{backrefx}
+   [2004/07/10  v2.0  Backref enhancements (DNJ Els)]
+\@ifpackageloaded{backref}%
+   {\DeclareOption*{}%
+    \ProcessOptions}%
+   {\RequirePackageWithOptions{backref}}
+\ifx\backrefxxx\page@backref%          (pageref)
+  \def\x@backref{\backrefpagesname}%
+  \def\x@backrefs{\backrefpagesnames}%
+\fi
+\ifx\backrefxxx\section@backref%       (ref)
+   \def\x@backref{\backrefsectionsname}%
+   \def\x@backrefs{\backrefsectionsnames}%
+\fi
+\ifx\backrefxxx\hyper@section@backref% (hyperref)
+  \def\x@backref{\backrefsectionsname}%
+  \def\x@backrefs{\backrefsectionsnames}%
+\fi
+\ifx\backrefxxx\hyper@page@backref%    (hyperpageref)
+  \def\x@backref{\backrefpagesname}%
+  \def\x@backrefs{\backrefpagesnames}%
+\fi
+\def\backrefpagesname{Citado en p\'agina~}
+\def\backrefpagesnames{Citado en p\'aginas~}
+\def\backrefsectionsname{Citado en secci\'on~}
+\def\backrefsectionsnames{Citado en secciones~}
+\def\backreflist{\space y~}
+\def\backrefformat#1{(#1.)}
+\def\backrefnocite{No citado}
+\renewcommand*{\backref}[1]{}
+\renewcommand*{\backrefalt}[4]{%
+   \ifcase #1 %
+      \backrefformat{\backrefnocite}%
+   \or
+      \backrefformat{\x@backref~#2}%
+   \else
+      \backrefformat{\x@backrefs~#2}%
+   \fi}
+\renewcommand*{\backrefsep}{, }
+\renewcommand*{\backreftwosep}{\backreflist}
+\renewcommand*{\backreflastsep}{\backreflist}
+\endinput
+%%
+%% End of file `backrefx.sty'.
